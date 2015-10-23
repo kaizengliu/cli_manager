@@ -253,6 +253,9 @@ class Manager(object):
             return func
         return decorate
 
+    def __call__(self, *args, **kwargs):
+        pass
+
     def handle(self, prog, args=None):
         app_parser = self.create_parser(prog)
 

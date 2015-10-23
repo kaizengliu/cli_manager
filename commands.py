@@ -96,8 +96,6 @@ class Command(object):
 
         options = []
 
-        # first arg is always "app" : ignore
-
         defaults = defaults or []
         kwargs = dict(izip(*[reversed(l) for l in (args, defaults)]))
 
@@ -182,13 +180,12 @@ class Command(object):
         self.parent = parent
         return parser
 
-    def __call__(self, app=None, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         """
-        Handles the command with the given app.
+        Handles the command.
         Default behaviour is to call ``self.run`` within a test request context.
         """
-        with app.test_request_context():
-            return self.run(*args, **kwargs)
+        return self.run(*args, **kwargs)
 
     def run(self):
         """
